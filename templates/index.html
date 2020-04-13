@@ -1,1 +1,9 @@
-<h1>index.html</h1>
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% if not known %}
+<p>Select option</p>
+{% else %}
+<p>Your option: {{ session['option'] }}</p>
+{% endif %}
+
+{{ wtf.quick_form(form) }}
