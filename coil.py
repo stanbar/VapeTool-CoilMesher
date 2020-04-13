@@ -1,6 +1,8 @@
 import pygmsh
 import math
 import meshio
+import numpy
+
 
 def legs_go_same_direction(n):
     if isinstance(n, int):
@@ -208,7 +210,11 @@ def claptoncoil(wraps, innerDiameter, wireDiameter, outerDiameter, legsLength):
 
     return geom
 
-
+def serialize_geom(geom) -> (numpy.ndarray, dict):
+    mesh = pygmsh.generate_mesh(geom, verbose=False)
+    points = mesh.points
+    cells = mesh.cells
+    return points, cells
 
 def generate_mesh(geom):
     mesh = pygmsh.generate_mesh(geom)
