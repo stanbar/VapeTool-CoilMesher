@@ -126,7 +126,7 @@ def claptoncoil(wraps, innerDiameter, wireDiameter, outerDiameter, legsLength):
     wraps = math.floor(wraps)
     coilHeight = wraps * wireDiameter / 1.8 * 2
 
-    lc = 0.005 # Mesh/Characteristic length
+    lc = 0.010 # Mesh/Characteristic length
     front3d = 0 # Set to 1 if Frontal 3D mesh algorithm is used
 
     print("legsLength: {} innerDiameter: {} coilHeight: {} wireDiameter: {}".format(legsLength, innerDiameter, coilHeight, wireDiameter))
@@ -198,6 +198,13 @@ def claptoncoil(wraps, innerDiameter, wireDiameter, outerDiameter, legsLength):
                 )
         last_extruded = a
         vol_coil.append(b)
+    
+    effectiveDiameter = innerDiameter - outerDiameter/2
+    radius = (effectiveDiameter/2)
+    circumference = math.pi*2*radius
+    noWraps = circumference // outerDiameter
+    arc = math.pi / 2 / noWraps
+
 
     return geom
 
@@ -219,6 +226,7 @@ if __name__ == "__main__":
     wireDiameter = 0.322
     outerDiameter = 0.322
     wraps = 5
-    geom = claptoncoil(wraps, innerDiameter, wireDiameter, outerDiameter, legsLength)
-    # geom = normalcoil(wraps, innerDiameter, wireDiameter, legsLength)
+    # geom = claptoncoil(wraps, innerDiameter, wireDiameter, outerDiameter, legsLength)
+    geom = parallelcoil(wraps, innerDiameter, wireDiameter, legsLength)
+    geom = normalcoil(wraps, innerDiameter, wireDiameter, legsLength)
     generate_mesh(geom)
