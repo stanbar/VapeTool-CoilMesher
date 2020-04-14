@@ -10,6 +10,7 @@ def page_not_found(e):
     return Response(status=404)
 
 
+@app.route('/return-file/', methods=['GET'])
 def returnFile():
     try:
         return send_file('coil.obj', attachment_filename='coil.obj')
@@ -27,7 +28,7 @@ def generateMesh():
         wireDiameter = request.json.get('wireDiameter')
         legsLength = request.json.get('legsLength')
         generate_mesh(normalcoil(wraps, innerDiameter, wireDiameter, legsLength))
-        return returnFile()
+        return redirect(url_for('returnFile'))
 
 
 @app.route('/', methods=['GET', 'POST'])
