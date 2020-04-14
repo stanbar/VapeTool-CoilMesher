@@ -23,7 +23,7 @@ def normalcoil(wraps, innerDiameter, wireDiameter, legsLength):
     lc = 0.005 # Mesh/Characteristic length
     front3d = 0 # Set to 1 if Frontal 3D mesh algorithm is used
 
-    #print("legsLength: {} innerDiameter: {} coilHeight: {} wireDiameter: {}".format(legsLength, innerDiameter, coilHeight, #wireDiameter))
+    print("legsLength: {} innerDiameter: {} coilHeight: {} wireDiameter: {}".format(legsLength, innerDiameter, coilHeight, wireDiameter))
 
     geom = pygmsh.built_in.Geometry()
     # inductor

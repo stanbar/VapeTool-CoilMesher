@@ -1,13 +1,12 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% if not known %}
-    <p>Fill the form</p>
-    {% else %}
-    <p>normal coil resut: {{ session['normalcoilResult'] }}</p>
-    <p>Insert wraps (5): {{ session['wrapsForm'] }}</p>
-    <p>Insert inner diameter (3.2): {{ session['innerDiameterForm'] }}</p>
-    <p>Insert wire diameter (0.322): {{ session['wireDiameterForm'] }}</p>
-    <p>Insert legs length (15): {{ session['legsLengthForm'] }}</p>
+<p>Select option</p>
+{% else %}
+<p>Insert wraps: {{ session['wrapsForm'] }}</p>
+<p>Insert inner diameter: {{ session['innerDiameterForm'] }}</p>
+<p>Insert wire diameter: {{ session['wireDiameterForm'] }}</p>
+<p>Insert legs length: {{ session['legsLengthForm'] }}</p>
 {% endif %}
 
 {{ wtf.quick_form(form) }}
