@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, send_file, request, Response
+from flask import Flask, redirect, url_for, send_file, request
 from coil import normalcoil, generate_mesh
 
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return Response(status=404)
+    return "page not found\n"
 
 
 @app.route('/return-file/', methods=['GET'])
@@ -15,13 +15,13 @@ def returnFile():
     try:
         return send_file('coil.obj', attachment_filename='coil.obj')
     except:
-        return response(status=500)
+        return "error return-file\n"
 
 
 @app.route('/generate-mesh', methods=['GET', 'POST'])
 def generateMesh():
     if not request.is_json:
-        return Response(status=400)
+        return "false\n"
     else:
         wraps = request.json.get('wraps')
         innerDiameter = request.json.get('innerDiameter')
