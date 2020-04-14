@@ -3,10 +3,7 @@
 {% if not known %}
 <p>Select option</p>
 {% else %}
-<p>Insert wraps: {{ session['wrapsForm'] }}</p>
-<p>Insert inner diameter: {{ session['innerDiameterForm'] }}</p>
-<p>Insert wire diameter: {{ session['wireDiameterForm'] }}</p>
-<p>Insert legs length: {{ session['legsLengthForm'] }}</p>
+<p>Your option: {{ session['option'] }}</p>
 {% endif %}
 
 {{ wtf.quick_form(form) }}

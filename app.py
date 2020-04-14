@@ -4,7 +4,6 @@ from wtforms import SubmitField
 from wtforms import IntegerField
 from wtforms.validators import DataRequired
 from flask_bootstrap import Bootstrap
-from coil import normalcoil
 
 
 app = Flask(__name__)
@@ -13,10 +12,7 @@ bootstrap = Bootstrap(app)
 
 
 class NameForm(FlaskForm):
-    wrapsForm = IntegerField('Insert wraps: ', validators=[DataRequired()])
-    innerDiameterForm = IntegerField('Insert inner diameter: ', validators=[DataRequired()])
-    wireDiameterForm = IntegerField('Insert wire diameter: ', validators=[DataRequired()])
-    legsLengthForm = IntegerField('Insert legs length: ', validators=[DataRequired()])
+    option = IntegerField('Insert option: ', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
@@ -28,26 +24,33 @@ def page_not_found(e):
 def index():
     form = NameForm()
     if form.validate_on_submit():
-        session['wrapsForm'] = form.wrapsForm.data
-        session['innerDiameterForm'] = form.innerDiameterForm.data
-        session['wireDiameterForm'] = form.wireDiameterForm.data
-        session['legsLengthForm'] = form.legsLengthForm.data
-        if session['wrapsForm'] is None:
+        session['option'] = form.option.data
+        if session['option'] is None:
             session['known'] = False
         else:
             session['known'] = True
-        
-        session['wrapsForm'] = form.wrapsForm.data
-        session['innerDiameterForm'] = form.innerDiameterForm.data
-        session['wireDiameterForm'] = form.wireDiameterForm.data
-        session['legsLengthForm'] = form.legsLengthForm.data
+        session['option'] = form.option.data
         return redirect(url_for('index'))
     return render_template(
             'index.html',
             form=form,
-            wrapsForm=session.get('wrapsForm'),
-            innerDiameterForm=session.get('innerDiameterForm'), 
-            wireDiameterForm=session.get('wireDiameterForm'), 
-            legsLengthForm=session.get('legsLengthForm'), 
-            known=session.get('known', False)
+            option=session.get('option'), known=session.get('known', False)
             )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
