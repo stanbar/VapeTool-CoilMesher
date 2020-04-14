@@ -1,9 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, send_file, request
-from coil import normalcoil, serialize_geom, generate_mesh
+from flask import Flask, redirect, url_for, send_file, request
+from coil import normalcoil, generate_mesh
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hard to guess string'
 
 
 @app.errorhandler(404)
@@ -28,11 +27,10 @@ def generateMesh():
         innerDiameter = request.json.get('innerDiameter')
         wireDiameter = request.json.get('wireDiameter')
         legsLength = request.json.get('legsLength')
-        
-        return "JSON ok\n"
+        generate_mesh(normalcoil(wraps, innerDiameter, wireDiameter, legsLength))
+        return redirect(url_for('returnFile'))
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    #generate_mesh(normalcoil(5, 3.2, 0.322, 15))
     return redirect(url_for('generateMesh'))
